@@ -21,4 +21,16 @@ public class UserPopulator {
             databaseConduit.save(user);
         }
     }
+
+    public long findIdByName(String name) {
+        // Not perfectly efficient, but good enough for a quick test
+        String[] userLines = fileLoader.loadStrings("/test_data/lkjhgfdsa.hjkl");
+        for (long i = 1; i <= userLines.length; i++) {
+            String[] userData = userLines[(int) (i - 1)].split(", ");
+            if (userData[0].equals(name)) {
+                return i; // IDs are likely auto-generated starting from 1
+            }
+        }
+        return -1;
+    }
 }
